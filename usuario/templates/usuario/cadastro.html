@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load static %}
+{% block conteudo %}
+
+<div class="how-search-section padding-bottom mt--83">
+    <div class="container">
+
+        <div class="how-search-wrapper">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+
+                {% if messages %}
+                    <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if form.errors %}
+                <!-- Error messaging -->
+
+                <div class="alert alert-danger" role="alert">
+                    <p>ATENÇÃO: Os campos abaixo são de preenchimento
+                        obrigatório</p>
+
+
+                    <ul class="list-group">
+                        {% for field in form %}
+                        {% if field.errors %}<li class='list-group-item'>**
+                            {{field.label}} **</li>{% endif %}
+                        {% endfor %}
+                        <li class='list-group-item'>{{ form.non_field_errors }}</li>
+                    </ul>
+
+                </div>
+                <!-- /Error messaging -->
+                {% endif %}
+
+
+                <div class="container text-center">
+                    <h3>Cadastro de Usuário</h3>
+                    <b>Os Campos Marcos com * são de preenchimento obrigatório</b>
+                 </div>
+             
+
+                <form method="POST" action="{% url 'usuario' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="nome">Nome *</label>
+                            <input type="text" name="nome"
+                                value="{{request.POST.nome}}"
+                                class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="usuario">Usuario *</label>
+                            <input type="login" name="login"
+                                value="{{request.POST.login}}"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="senha">Senha *</label>
+                            <input type="password" name="senha"
+                                value="{{request.POST.senha}}"
+                                class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="rg">RG</label>
+                            <input type="rg" name="rg"
+                                value="{{request.POST.rg}}"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="cpf">CPF *</label>
+                            <input type="cpf" name="cpf"
+                                value="{{request.POST.cpf}}"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="data_nascimento">Data de Nascimento *</label>
+                            <input type="date" name="data_nascimento"
+                                value="{{request.POST.data_nascimento}}"
+                                class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email *</label>
+                            <input type="email" name="email"
+                                value="{{request.POST.email}}"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="celular">Celular *</label>
+                            <input type="text" name="celular"
+                                value="{{request.POST.celular}}"
+                                class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="cep">Cep *</label>
+                            <input type="text" name="cep"
+                                id="cep"
+                                value="{{request.POST.cep}}"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="logradouro">Logradouro *</label>
+                            <input type="text" name="logradouro"
+                                id="logradouro"
+                                value="{{request.POST.logradouro}}"
+                                class="form-control" readonly="readonly">
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="localidade">Localidade *</label>
+                            <input type="text" name="localidade"
+                                id="localidade"
+                                value="{{request.POST.localidade}}"
+                                class="form-control" readonly="readonly">
+                        </div>
+
+                        <div class="form-group col-md-1">
+                            <label for="numero">Nº *</label>
+                            <input type="text" name="numero"
+                                id="numero"
+                                value="{{request.POST.numero}}"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="complemento">Complemento</label>
+                            <input type="text" name="complemento"
+                                id="complemento"
+                                value="{{request.POST.complemento}}"
+                                class="form-control" readonly="readonly">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="bairro">Cidade *</label>
+                            <input type="text" name="bairro"
+                                id="bairro"
+                                value="{{request.POST.bairro}}"
+                                class="form-control" readonly="readonly">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="uf">UF *</label>
+                                <input type="text" id="uf" name="uf"
+                                    id="uf"
+                                    value="{{request.POST.uf}}"
+                                    class="form-control" readonly="readonly">
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Efetuar Cadastro</button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $("#cep").focusout(function(){
+        //Início do Comando AJAX
+        $.ajax({
+            //O campo URL diz o caminho de onde virá os dados
+            //É importante concatenar o valor digitado no CEP
+            url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
+            //Aqui você deve preencher o tipo de dados que será lido,
+            //no caso, estamos lendo JSON.
+            dataType: 'json',
+            //SUCESS é referente a função que será executada caso
+            //ele consiga ler a fonte de dados com sucesso.
+            //O parâmetro dentro da função se refere ao nome da variável
+            //que você vai dar para ler esse objeto.
+            success: function(resposta){
+                //Agora basta definir os valores que você deseja preencher
+                //automaticamente nos campos acima.
+                $("#logradouro").val(resposta.logradouro);
+                $("#complemento").val(resposta.complemento);
+                $("#bairro").val(resposta.bairro);
+                $("#localidade").val(resposta.localidade);
+                $("#uf").val(resposta.uf);
+                //Vamos incluir para que o Número seja focado automaticamente
+                //melhorando a experiência do usuário
+                $("#numero").focus();
+            }
+        });
+    });
+</script>
+{% endblock conteudo %}

@@ -1,0 +1,32 @@
+ {% load static %}
+
+<header class="header-section">
+    <div class="container">
+        <div class="header-wrapper">
+            <div class="logo-area">
+                <div class="logo">
+                    <a href="/">
+                        <img src="{% static 'assets/images/logo/logo.png' %}"
+                            alt="logo">
+                    </a>
+                </div>
+            </div>
+            <div class="header-bar d-lg-none">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header-right">
+                <a href="{% url 'admin:index' %}" class="header-button d-none
+                    d-md-inline-block">Administrador</a>
+            </div>
+        </div>
+    </div>
+</header>
+<!--============= Header Section Ends Here =============-->
+
+<!--============= Banner Section Starts Here =============-->
+<section class="banner-1 bg_img"
+    data-background="{% static 'assets/images/banner/banner-1.jpg' %}">
+</section>
+<!--============= Banner Section Ends Here =============-->
