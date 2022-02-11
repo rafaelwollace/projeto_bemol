@@ -73,6 +73,7 @@ WSGI_APPLICATION = 'desafio_bemol.wsgi.application'
 
 
 # Database
+# TesteBrench
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
